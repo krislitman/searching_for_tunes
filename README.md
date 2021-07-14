@@ -84,7 +84,7 @@
 
 **GET '/api/v1/new_releases'**
 
-<p>Return new albums from Spotifys API, include an optional parameter of <page> to return more albums</p>
+<p>Return new albums from Spotifys API, include an optional parameter of `page` to return more albums</p>
  
 <p>Example response: </p>
   
@@ -117,7 +117,7 @@
 
 <p>Performs a search to find Albums by an Artist. Must include an <artist> parameter with a search term (can be just a fragment)</p>
  
-<p>Example response for a search of <Bieber>: </p>
+<p>Example response for a search of `Bieber`: </p>
   
 ```
 {
