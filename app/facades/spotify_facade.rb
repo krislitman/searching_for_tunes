@@ -16,12 +16,17 @@ class SpotifyFacade
   def new_releases_route
     json_data = SpotifyService.new_releases
     json_data[:albums][:items].each do |release|
-      Album.create(
-        name: release[:name],
-        spotify_id: release[:id],
-        release_date: release[:release_date],
-        album_type: release[:type]
-      )
+      if Album.find_by(spotify_id: release[:id])
+        REDIS.get("album #{release[:id]}")
+      else
+        album = Album.create(
+          name: release[:name],
+          spotify_id: release[:id],
+          release_date: release[:release_date],
+          album_type: release[:type]
+        )
+        REDIS.set("album #{album.spotify_id}", album)
+      end
     @new_releases = Album.all
     end
   end
