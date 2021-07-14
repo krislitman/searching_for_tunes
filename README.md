@@ -32,6 +32,10 @@
   </a> -->
 
   <h3 align="center">Searching for Tunes</h3>
+  
+  <br>
+  
+  <h4 align="center">Search through new releases on Spotify to find new tracks by Artist or Album!</h4>
 
   <!-- <p align="center">
     Search through Artists and Songs on Spotify to find great new music!
@@ -68,7 +72,6 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
@@ -76,6 +79,63 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+
+#### Endpoints
+
+**GET '/api/v1/new_releases'**
+
+<p>Return new albums from Spotifys API, include an optional parameter of <page> to return more albums</p>
+ 
+<p>Example response: </p>
+  
+```
+{
+    "data": [
+        {
+            "id": "1",
+            "type": "album",
+            "attributes": {
+                "name": "Go Away",
+                "spotify_id": "1nETLIyhtk8GjuqyfOt1G7",
+                "release_date": "2021-07-08",
+                "album_type": "album"
+            }
+        },
+        {
+            "id": "2",
+            "type": "album",
+            "attributes": {
+                "name": "Stay (with Justin Bieber)",
+                "spotify_id": "4QLAtpLNUsHEYrcHXmMIZZ",
+                "release_date": "2021-07-09",
+                "album_type": "album"
+            }
+        },
+```
+
+**GET '/api/v1/albums_by_artist'**
+
+<p>Performs a search to find Albums by an Artist. Must include an <artist> parameter with a search term (can be just a fragment)</p>
+ 
+<p>Example response for a search of <Bieber>: </p>
+  
+```
+{
+    "data": [
+        {
+            "id": "2",
+            "type": "album",
+            "attributes": {
+                "name": "Stay (with Justin Bieber)",
+                "spotify_id": "4QLAtpLNUsHEYrcHXmMIZZ",
+                "release_date": "2021-07-09",
+                "album_type": "album"
+            }
+        }
+    ]
+}
+```
+
 
 <!-- Explain the database setup, and endpoints that are available. Also how to get your own working key for spotify to make API calls. -->
 
@@ -151,11 +211,3 @@ Go to localhost:3000 to try them out!
 Kris Litman - kris.d.litman@gmail.com
 
 Project Link: [https://github.com/krislitman/searching_for_tunes](https://github.com/krislitman/searching_for_tunes)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-
-
-
