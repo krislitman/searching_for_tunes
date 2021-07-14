@@ -1,7 +1,7 @@
 class Api::V1::SpotifyController < ApplicationController
 
   def new_releases
-    releases = SpotifyFacade.new(:new_releases)
-    render json: { 'message': { 'Request': 'Success' }}, status: :ok
+    spotify = SpotifyFacade.new(:new_releases)
+    render json: SpotifySerializer.new(spotify.new_releases), status: :ok
   end
 end

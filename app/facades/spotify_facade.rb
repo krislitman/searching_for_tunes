@@ -22,6 +22,7 @@ class SpotifyFacade
         release_date: release[:release_date],
         album_type: release[:type]
       )
+    @new_releases = Album.all
     end
   end
 end
