@@ -48,6 +48,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'figaro'
   gem 'capybara'
+  gem 'faker'
 end
 
 group :development do

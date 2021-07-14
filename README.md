@@ -83,6 +83,10 @@
 
 * [Rails](https://github.com/rails/rails)
 * [RSpec](https://github.com/rspec/rspec-rails)
+* Postgresql
+* Redis
+* Postman
+* VCR
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -130,6 +134,12 @@ To run a local server and test the available endpoints, run the command:
 
 ```
 $ rails s
+```
+
+You will need to run a Redis server as well for caching with this command:
+
+```
+$ redis-server
 ```
 
 Go to localhost:3000 to try them out!
