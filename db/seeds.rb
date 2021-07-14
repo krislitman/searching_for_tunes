@@ -1,13 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Clean Database
+Artist.destroy_all
+Album.destroy_all
+ArtistAlbum.destroy_all
 
 # Create Albums
-Album.destroy_all
 json_data = SpotifyService.new_releases
 json_data[:albums][:items].each do |release|
   if Album.find_by(spotify_id: release[:id])
@@ -39,3 +35,23 @@ json_data[:albums][:items].each do |release|
     end
   end
 end
+
+# Create Artist Albums
+json_data = SpotifyService.new_releases
+json_data[:albums][:items].each do |release|
+  album = Album.find_by(spotify_id: release[:id])
+  release[:artists].each do |artist|
+    creator = Artist.find_by(spotify_id: artist[:id])
+    if ArtistAlbum.find_by(artist_id: creator.id, album_id: album.id)
+      REDIS.get("artist album #{artist[:id]} #{album.id}")
+    else
+      ArtistAlbum.create(
+        artist_id: creator.id,
+        album_id: album.id
+      )
+      REDIS.set("artist album #{artist[:id]} #{album.id}", true)
+    end
+  end
+end
+
+

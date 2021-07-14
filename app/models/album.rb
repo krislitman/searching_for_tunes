@@ -5,4 +5,5 @@ class Album < ApplicationRecord
   validates :album_type, presence: true
 
   has_many :artist_albums
+  has_many :artists, through: :artist_albums
 end
