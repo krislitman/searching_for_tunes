@@ -8,12 +8,12 @@ class SpotifyFacade
 
   def find_route(input)
     case
-    when input == :new_releases
-      new_releases_route
+    when input[:type] == :new_releases
+      new_releases_route(input)
     end
   end
 
-  def new_releases_route
+  def new_releases_route(input)
     json_data = SpotifyService.new_releases
     json_data[:albums][:items].each do |release|
       if Album.find_by(spotify_id: release[:id])
@@ -27,7 +27,7 @@ class SpotifyFacade
         )
         REDIS.set("album #{album.spotify_id}", album)
       end
-    @new_releases = Album.all
+    @new_releases = Album.pagination(input[:page], 20)
     end
   end
 end

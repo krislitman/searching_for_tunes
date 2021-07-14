@@ -3,6 +3,7 @@ class SpotifyService
   def self.new_releases
     response = Faraday.get("https://api.spotify.com/v1/browse/new-releases") do |req|
       req.headers['Authorization'] = "Bearer #{getToken}"
+      req.params['limit'] = 50
     end
     JSON.parse(response.body, symbolize_names: true)
   end
