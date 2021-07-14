@@ -63,9 +63,21 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
+# Config for shoulda-matchers gem
+
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
     with.library :rails
   end
+end
+
+# Config for VCR gem
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock
+  # config.filter_sensitive_data('DONT_LOOK') { Figaro.env.key }
+  config.default_cassette_options = { re_record_interval: 365.days }
+  config.allow_http_connections_when_no_cassette = true
 end

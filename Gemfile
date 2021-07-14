@@ -28,6 +28,16 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # API Development
 gem 'faraday'
 gem 'fast_jsonapi'
+gem 'httparty'
+
+# DB Visuals
+gem 'active_designer'
+
+# REDIS
+gem 'redis-rails'
+gem 'redis-namespace'
+gem 'redis'
+gem 'redis-rack-cache'
 
 group :development, :test do
   gem 'pry'
@@ -37,12 +47,17 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'figaro'
+  gem 'capybara'
 end
 
 group :development do
   gem 'listen', '~> 3.3'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
+  gem 'webmock'
+  gem 'vcr'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
