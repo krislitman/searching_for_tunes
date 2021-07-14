@@ -6,4 +6,8 @@ class Album < ApplicationRecord
 
   has_many :artist_albums
   has_many :artists, through: :artist_albums
+
+  def self.by_artist(artist)
+    joins(:artists).where('artists.name ILIKE ?', "%#{artist}%")
+  end
 end
